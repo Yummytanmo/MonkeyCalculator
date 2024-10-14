@@ -59,11 +59,18 @@ def main():
     start_x = 1560 #int(input("请输入起始X坐标: "))
     start_y = 730 #int(input("请输入起始Y坐标: "))
     bbox = (1432,224,1763, 324)
-    input_char = compare_numbers_in_bbox(bbox)
-    draw_number(input_char, start_x, start_y)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print(f"程序运行时间: {elapsed_time:.4f} 秒")
+    try:
+        while True:
+            x, y = pyautogui.position()
+            print(f"Mouse position: ({x}, {y})", end='\r')
+            time.sleep(0.1)
+            input_char = compare_numbers_in_bbox(bbox)
+            draw_number(input_char, start_x, start_y)
+    except KeyboardInterrupt:
+        print("\n程序中断.")
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"程序运行时间: {elapsed_time:.4f} 秒")
 
 if __name__ == "__main__":
     main()
