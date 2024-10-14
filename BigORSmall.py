@@ -7,6 +7,7 @@ import numpy as np
 import pytesseract
 import re
 pytesseract.pytesseract.tesseract_cmd = r'F:\Software\Tesseract\tesseract.exe'
+start_time = time.time()
 def compare_numbers_in_bbox(bbox):
     # 截取屏幕
     img = ImageGrab.grab(bbox)
@@ -42,24 +43,27 @@ def draw_number(char, start_x, start_y):
 
     if char == '>':
         pyautogui.mouseDown()
-        pyautogui.dragRel(length, -length)  # 画上斜线
-        pyautogui.dragRel(-length, -length) # 画下斜线
+        pyautogui.dragRel(length, -length,duration=0.2)  # 画上斜线
+        pyautogui.dragRel(-length, -length,duration=0.2) # 画下斜线
         pyautogui.mouseUp()
     elif char == '<':
         pyautogui.mouseDown()
-        pyautogui.dragRel(-length, -length) # 斜线向下
-        pyautogui.dragRel(length, -length)# 斜线向上
+        pyautogui.dragRel(-length, -length,duration=0.2) # 斜线向下
+        pyautogui.dragRel(length, -length,duration=0.2)# 斜线向上
         pyautogui.mouseUp()
         
 
 def main():
 
-    time.sleep(2)  # 给用户2秒时间调整鼠标到屏幕上
-    start_x = 700 #int(input("请输入起始X坐标: "))
-    start_y = 1000 #int(input("请输入起始Y坐标: "))
-    bbox = (200, 200, 1000, 500)
+   #time.sleep(2)  # 给用户2秒时间调整鼠标到屏幕上
+    start_x = 1560 #int(input("请输入起始X坐标: "))
+    start_y = 730 #int(input("请输入起始Y坐标: "))
+    bbox = (1432,224,1763, 324)
     input_char = compare_numbers_in_bbox(bbox)
     draw_number(input_char, start_x, start_y)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"程序运行时间: {elapsed_time:.4f} 秒")
 
 if __name__ == "__main__":
     main()
