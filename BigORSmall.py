@@ -66,7 +66,7 @@ def main():
             time.sleep(0.1)
             input_char = compare_numbers_in_bbox(bbox)
             draw_number(input_char, start_x, start_y)
-            time.sleep(1)  # 等题目
+            time.sleep(0.2)  # 等题目
     except KeyboardInterrupt:
         print("\n程序中断.")
         end_time = time.time()
